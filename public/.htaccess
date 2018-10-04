@@ -1,0 +1,10 @@
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+#SetEnvIf HTTP_HOST app.workplacepulse.net APPLICATION_ENV=production
+SetEnvIf HTTP_HOST staging.workplacepulse.net APPLICATION_ENV=development

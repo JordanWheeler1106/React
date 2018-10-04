@@ -1,0 +1,40 @@
+﻿<?php
+
+class Application_Model_Emailaccount
+{
+	private function __construct()
+	{
+	}
+	public static function register_account($data)
+	{	
+		$db = Zend_Db_Table::getDefaultAdapter();
+				
+		$insert_data=array();
+		$insert_data['userid']=$data['userid'];
+		$insert_data['email']=$data['email'];
+		$insert_data['password']=$data['password'];
+		$insert_data['email_type']=$data['email_type'];
+		
+		$db->insert('account',$insert_data);
+		
+		$email_list = $db->fetchAll("select * from account where userid='".$data['userid']."'");
+		return $email_list;
+	}
+	
+	public static function check_account($email) {
+		$db = Zend_Db_Table::getDefaultAdapter();
+		
+		$check = $db->fetchRow("select * from account where email='".$email."'");
+		
+		if($check)
+				return false;
+				
+		return true;
+	}
+	public static function get_allbyuserid($userid) {
+		$db = Zend_Db_Table::getDefaultAdapter();
+		
+		$email_list = $db->fetchAll("select * from account where userid='".$userid."'");
+		return $account_list;
+	}
+}
