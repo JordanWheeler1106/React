@@ -72,7 +72,6 @@ class ApiController extends Zend_Controller_Action
     public function registerEmailAction() {
     		header('Content-Type: application/json; charset=utf-8');
 				$data = json_decode($_REQUEST['sync_email']);
-				
 				$result=array();				
 				if(!isset($data->email) || !isset($data->password) || !isset($data->email_type) || !isset($data->userid)) {
 						$result['result']=0;
@@ -120,9 +119,7 @@ class ApiController extends Zend_Controller_Action
     		$userid = $_REQUEST['userid'];
     		$db = Zend_Db_Table::getDefaultAdapter();		
     		$result=array();
-    		
-		   	$account_list = $db->fetchAll("select * from account where userid='".$userid."'");   				
-    		
+	    	$account_list = $db->fetchAll("select * from account where userid='".$userid."'");   				
     		header('Content-Type: application/json');
 	    	echo json_encode($account_list);
 	    	exit;
@@ -140,10 +137,8 @@ class ApiController extends Zend_Controller_Action
     }
     public function deleteFeedingEmailAction() {
     		$emailid = $_REQUEST['emailid'];
-    		$db = Zend_Db_Table::getDefaultAdapter();		    		
-    		
-    		$db->update('emailbox',array('status'=>'removed'), 'id='.$emailid);
-    		
+    		$db = Zend_Db_Table::getDefaultAdapter();		    			
+    		$db->update('emailbox',array('status'=>'removed'), 'id='.$emailid);  		
     		header('Content-Type: application/json');
 	    	echo json_encode(array("result"=>1));
 	    	exit;
